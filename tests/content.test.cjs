@@ -117,6 +117,15 @@ test("manual click or T key while loading cancels automatic switching", () => {
   }
 });
 
+test("trusted keydown without a key does not throw or cancel automatic switching", () => {
+  const page = setup({ ready: false });
+  assert.doesNotThrow(() => page.emit("keydown", { isTrusted: true, target: null }));
+  assert.equal(page.pending, 1);
+  page.ready();
+  page.tick();
+  assert.equal(page.clicks, 1);
+});
+
 test("polling is bounded and stopped when leaving the page", () => {
   const page = setup({ ready: false });
   page.tick(20001);

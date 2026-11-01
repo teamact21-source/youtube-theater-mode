@@ -75,7 +75,7 @@
     const editing = target instanceof Element &&
       target.closest("input, textarea, select, [contenteditable]:not([contenteditable='false'])");
     if (event.isTrusted && !editing && !event.ctrlKey && !event.metaKey &&
-        !event.altKey && event.key.toLowerCase() === "t") respectManualChoice();
+        !event.altKey && event.key?.toLowerCase() === "t") respectManualChoice();
   }, true);
 
   navigate();
